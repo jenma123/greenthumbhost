@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'greenthumb_main',
-    'accounts'
+    'accounts',
+    'vendor',
 ]
 
 MIDDLEWARE = [
