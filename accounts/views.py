@@ -4,10 +4,12 @@ from django.utils.http import urlsafe_base64_decode
 from vendor.forms import VendorForm
 from django.contrib.auth.tokens import default_token_generator
 from .forms import UserForm
+from vendor.models import Vendor
 from .models import User, UserProfile
 from  django.contrib  import messages,auth
 from  django.contrib.auth.decorators import login_required,user_passes_test
 from django.core.exceptions import PermissionDenied
+
 def check_role_vendor(user):
     if user.role == 1:
         return True
@@ -22,7 +24,7 @@ def check_role_customer(user):
 def registerUser(request):
     if request.user.is_authenticated:
         messages.warning(request, 'You are already logged in!')
-        return redirect('dashboard')
+        return redirect('myAccount')
     elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -154,7 +156,8 @@ def custDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
-        return render(request,'accounts/vendorDashboard.html')
+   
+    return render(request,'accounts/vendorDashboard.html')
 def forgot_password(request):
     if request.method == 'POST':
         email = request.POST['email']
