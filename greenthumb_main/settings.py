@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'greenthumb_main',
     'accounts',
     'vendor',
+    'menu',
 ]
 
 MIDDLEWARE = [
