@@ -31,6 +31,9 @@
 										<input type="text" name="keyword" placeholder="Vendor name or plant name">
 									</div>
 								</div>
+								<div>
+									
+								</div>
 								<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 									<div class="field-holder">
 										<ul>
@@ -84,11 +87,13 @@
 						<p>Explore Indoor Plants, supplies, and accessories by locality</p>
 					</div>
 				</div>
-				<!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+					
 					<div class="company-logo">
 						<ul>
 							{% for vendor in vendors %}
 							<li class="has-border">
+								
 								<figure>
 									{% if vendor.user_profile.profile_picture %}
 									<a href="{% url 'vendor_detail' vendor.vendor_slug %}"><img src="{{ vendor.user_profile.profile_picture.url }}" height="125" class="attachment-full size-full wp-post-image" alt=""></a>
@@ -103,7 +108,7 @@
 				</div>
 			</div>
 		</div>
-	</div>-->
+	</div>
 	<!-- Top Restarurants Section End -->
 	<!-- Choose From Most Popular Listin Start -->
 	<div class="page-section nopadding cs-nomargin" style="margin-top: 0px;padding-top: 60px;padding-bottom: 50px;margin-bottom: 0px;background: #ffffff;">
