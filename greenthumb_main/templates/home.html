@@ -4,10 +4,7 @@
 
 {% block content %}
 <!-- Main Section Start -->
-
-      
-	<script src="{% static 'script.js'%}" type="text/javascript"></script>
-
+<div class="main-section">
 	<!-- Home Pages Elements Strat -->
 	<!-- Main Search Start -->
 	<div class="page-section nopadding cs-nomargin main-search-bar" style="padding-top: 200px; padding-bottom: 150px; margin-bottom: 0px; background: url({% static 'extra-images/bg.jpg' %}) no-repeat center / cover;">
@@ -16,23 +13,19 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 					<div class="element-title">
 						<h1 style="font-size: 40px; color: #505050; text-transform: uppercase; line-height: 50px; margin-bottom: 25px; text-align:center;">
-							We provide a market place for indoor plants<br>we do</h1>
+							We provide a marketplace for Indoor Plants<br></h1>
 						<p style="font-size: 18px; letter-spacing: 1px; color: #505050; text-align:center;">
-							Supply the high quality plant at reasonable price
-							And assists other small scale sellers in this business to establish an independent online platform for selling their plants.</p>
+							Here Vendors and Buyers of Indoor Plant meets.</p>
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 					<div class="main-search fancy bg-holder">
-						<form  method="GET">
+						<form action="{% url 'search' %}" method="GET">
 							<div class="row">
 								<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
 									<div class="field-holder">
-										<input type="text" name="keyword" placeholder="Vendor name or plant name">
+										<input type="text" name="keyword" placeholder="Shop name or plant name">
 									</div>
-								</div>
-								<div>
-									
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 									<div class="field-holder">
@@ -83,17 +76,15 @@
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="element-title align-left">
-						<h2>Top Shops</h2>
-						<p>Explore Indoor Plants, supplies, and accessories by locality</p>
+						<h2>Top Vendors</h2>
+						<p>Explore Indoor Plant and Supplies by locality</p>
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0 !important; padding-left: 0 !important;">
-					
 					<div class="company-logo">
 						<ul>
 							{% for vendor in vendors %}
 							<li class="has-border">
-								
 								<figure>
 									{% if vendor.user_profile.profile_picture %}
 									<a href="{% url 'vendor_detail' vendor.vendor_slug %}"><img src="{{ vendor.user_profile.profile_picture.url }}" height="125" class="attachment-full size-full wp-post-image" alt=""></a>
@@ -117,11 +108,10 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="element-title align-center">
 						<h2>Choose From Most Popular Vendors</h2>
-						<p>The best in the Markets.</p>
+						
 					</div>
 				</div>
-				
-				<!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="listing fancy">
 						<ul class="row">
 							{% for vendor in vendors %}
@@ -180,12 +170,13 @@
 
 						</ul>
 					</div>
-				</div>-->
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Choose From Most Popular Listing End -->
 
+	<!-- Home Pages Elements End  -->
 </div>
 <!-- Main Section End -->
 {% endblock %}

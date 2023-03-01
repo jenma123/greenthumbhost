@@ -1,10 +1,8 @@
-#from enum import unique
+from enum import unique
 from django.db import models
 from accounts.models import User, UserProfile
-#from accounts.utils import send_notification
-from datetime import time, date, datetime
-
 from accounts.utils import send_notification
+from datetime import time, date, datetime
 
 
 class Vendor(models.Model):
@@ -16,9 +14,12 @@ class Vendor(models.Model):
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-def __str__(self):
+
+    def __str__(self):
         return self.vendor_name
-def save(self, *args, **kwargs):
+
+   
+    def save(self, *args, **kwargs):
         if self.pk is not None:
             # Update
             orig = Vendor.objects.get(pk=self.pk)

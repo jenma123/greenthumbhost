@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from ctypes import cast
+import os
 from pathlib import Path
 from decouple import config
 
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'greenthumb_main',
-    
+     'django.contrib.gis',
     'accounts',
     'vendor',
     'menu',
@@ -88,7 +89,7 @@ WSGI_APPLICATION = 'greenthumb_main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': config('DB_NAME'),
         'USER':config('DB_USER'),
         'PASSWORD':config('DB_PASSWORD'),
@@ -150,4 +151,8 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-GOOGLE_API_KEY = 'AIzaSyB415CJAh-2U-gvhbJbHoBUsniKtKsj56M'
+GOOGLE_API_KEY = 'AIzaSyA3bsDl1xddiU_w38hA-fsGea8kWsp5uJM'
+if DEBUG == True:
+    os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
+    os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
+    GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
