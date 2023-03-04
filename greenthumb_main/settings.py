@@ -34,6 +34,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
     'menu',
     'marketplace',
     'google_translate',
+    'customers'
 ]
 
 MIDDLEWARE = [
@@ -74,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                  'accounts.context_processors.get_vendor',
+                 'accounts.context_processors.get_user_profile',
                  'accounts.context_processors.get_google_api',
                  'marketplace.context_processors.get_cart_counter',
                  'marketplace.context_processors.get_cart_amounts',
