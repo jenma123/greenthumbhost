@@ -76,6 +76,7 @@ TEMPLATES = [
                  'accounts.context_processors.get_vendor',
                  'accounts.context_processors.get_google_api',
                  'marketplace.context_processors.get_cart_counter',
+                 'marketplace.context_processors.get_cart_amounts',
             ],
         },
     },
@@ -152,6 +153,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 GOOGLE_API_KEY = 'AIzaSyA3bsDl1xddiU_w38hA-fsGea8kWsp5uJM'
+
 if DEBUG == True:
     os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
     os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
