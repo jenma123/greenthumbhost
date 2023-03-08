@@ -1,10 +1,12 @@
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from accounts.forms import UserInfoForm, UserProfileForm
 from accounts.models import UserProfile
 from django.contrib import messages
-#from orders.models import Order, OrderedFood
-#import simplejson as json
+
+from orders.models import Order, OrderedPlant
+import simplejson as json
 
 
 @login_required(login_url='login')
@@ -33,7 +35,7 @@ def cprofile(request):
     return render(request, 'customers/cprofile.html', context)
 
 
-'''def my_orders(request):
+def my_orders(request):
     orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
 
     context = {
@@ -45,7 +47,7 @@ def cprofile(request):
 def order_detail(request, order_number):
     try:
         order = Order.objects.get(order_number=order_number, is_ordered=True)
-        ordered_food = OrderedFood.objects.filter(order=order)
+        ordered_food = OrderedPlant.objects.filter(order=order)
         subtotal = 0
         for item in ordered_food:
             subtotal += (item.price * item.quantity)
@@ -58,4 +60,4 @@ def order_detail(request, order_number):
         }
         return render(request, 'customers/order_detail.html', context)
     except:
-        return redirect('customer')'''
+        return redirect('customer')

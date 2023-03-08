@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'menu',
     'marketplace',
     'google_translate',
-    'customers'
+    'customers',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,7 @@ TEMPLATES = [
                  'accounts.context_processors.get_vendor',
                  'accounts.context_processors.get_user_profile',
                  'accounts.context_processors.get_google_api',
+                 'accounts.context_processors.get_paypal_client_id',
                  'marketplace.context_processors.get_cart_counter',
                  'marketplace.context_processors.get_cart_amounts',
             ],
@@ -158,7 +160,10 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 GOOGLE_API_KEY = 'AIzaSyA3bsDl1xddiU_w38hA-fsGea8kWsp5uJM'
-
+PAYPAL_CLIENT_ID= 'AYX9T7h4y6bTIGmUC4VsHiUYSWy1rs9TNX8EbYSrcGe-8X7waxPPDJ5AthM_9yYJLlpvv4-CvysnTgzi'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+RZP_KEY_ID = 'rzp_test_GiCOuUR8fCtCXh'
+RZP_KEY_SECRET = 'TkCcOMoPATw8gme5qO6GlkqP'
 if DEBUG == True:
     os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
     os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
