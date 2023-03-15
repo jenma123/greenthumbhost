@@ -6,7 +6,7 @@ from marketplace.models import Cart, Tax
 from marketplace.context_processors import get_cart_amounts
 from menu.models import PlantItem
 from .forms import OrderForm
-from .models import Order, OrderedPlant, Payment
+from .models import Order, OrderUpdate, OrderedPlant, Payment
 import simplejson as json
 from .utils import generate_order_number, order_total_by_vendor
 from accounts.utils import send_notification
@@ -200,7 +200,7 @@ def payments(request):
                 send_notification(mail_subject, mail_template, context)
 
         # CLEAR THE CART IF THE PAYMENT IS SUCCESS
-        # cart_items.delete() 
+        cart_items.delete() 
 
         # RETURN BACK TO AJAX WITH THE STATUS SUCCESS OR FAILURE
         response = {
@@ -234,3 +234,23 @@ def order_complete(request):
         return render(request, 'orders/order_complete.html', context)
     except:
         return redirect('home')
+def tracker(request):
+    if request.method=="POST":
+        order_number = request.POST.get('orderId', '')
+        email = request.POST.get('email', '')
+        try:
+            order = Order.objects.filter(order_number=order_number, email=email)
+            if len(order)>0:
+                update = OrderUpdate.objects.filter(order_number=order_number)
+                updates = []
+                for item in update:
+                    updates.append({'text': item.update_desc, 'time': item.timestamp})
+                    response = json.dumps({"status":"success", "updates": updates, "itemsJson": order[0].items_json}, default=str)
+                return HttpResponse(response)
+            else:
+                return HttpResponse('{"status":"noitem"}')
+        except Exception as e:
+            return HttpResponse('{"status":"error"}')
+
+    return render(request, 'orders/tracker.html')
+
