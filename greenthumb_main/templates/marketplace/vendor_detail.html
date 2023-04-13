@@ -106,7 +106,7 @@
                                                     <span>{{ plant.description }}</span>
                                                 </div>
                                                 <div class="price-holder">
-                                                    <span class="price">${{ plant.price }}</span>
+                                                    <span class="price">₹{{ plant.price }}</span>
 
                                                     <a href="#" class="decrease_cart" data-id="{{ plant.id }}" data-url="{% url 'decrease_cart' plant.id %}" style="margin-right: 28px;"><i class="icon-minus text-color"></i></a>
                                                     <label id="qty-{{plant.id}}">0</label>

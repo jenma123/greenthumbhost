@@ -30,15 +30,15 @@
   <table role="presentation" width="100%">
     <tr>
     <td  align="center" style="color: white;">
-     <img alt="Logo" src="https://rathank.com/plantonline/logo/logo.png" width="400px" align="middle">
+     <img alt="Logo" src="https://iili.io/HX4YhrJ.png" width="400px" align="middle">
       </td>
   </table>
 
   <table bgcolor="#EAF0F6" width="100%" role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 60px 60px;">
     <tr>
         <td>
-            <h2 style="text-align:center;">Thank you for your order</h2>
-            <p>Review your order information below.</p>
+            <h2 style="text-align:center;">You got a new order</h2>
+            <p>Order information below.</p>
         </td>
     </tr>
     <tr>
@@ -73,7 +73,7 @@
             <small><a href="http://{{ domain }}{% url 'vendor_detail' plant.plantitem.vendor.vendor_slug %}" style="color:#ccc;">{{ plant.plantitem.vendor.vendor_name }}</a></small>
             </td>
             <td>{{ plant.quantity }}</td>
-            <td>${{ plant.price }}</td>
+            <td>₹{{ plant.price }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -84,17 +84,17 @@
   <!-- Order amounts -->
   <table bgcolor="#EAF0F6" width="100%" role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 60px 60px;">
     <tbody>
-        <tr>Subtotal: ${{ customer_subtotal }}</tr>
+        <tr>Subtotal: ₹{{ customer_subtotal }}</tr>
         
         {% for key, val in tax_data.items %}
             {% for i, j in val.items %}
                 <tr>
-                    <td>{{ key }} <small>({{ i }}%)</small> : <span>${{ j }}</span></td>
+                    <td>{{ key }} <small>({{ i }}%)</small> : <span>₹{{ j }}</span></td>
                 </tr>
             {% endfor %}
         {% endfor %}
 
-        <tr>Grand total: ${{ order.total }}</tr>
+        <tr>Grand total: ₹{{ order.total }}</tr>
     </tbody>
   </table>
 

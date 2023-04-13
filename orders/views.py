@@ -1,12 +1,12 @@
 from urllib import response
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from greenthumb_main.settings import RZP_KEY_ID, RZP_KEY_SECRET
 from marketplace.models import Cart, Tax
 from marketplace.context_processors import get_cart_amounts
 from menu.models import PlantItem
 from .forms import OrderForm
-from .models import Order, OrderUpdate, OrderedPlant, Payment
+from .models import Order, OrderedPlant, Payment
 import simplejson as json
 from .utils import generate_order_number, order_total_by_vendor
 from accounts.utils import send_notification
@@ -234,23 +234,17 @@ def order_complete(request):
         return render(request, 'orders/order_complete.html', context)
     except:
         return redirect('home')
-def tracker(request):
-    if request.method=="POST":
-        order_number = request.POST.get('orderId', '')
-        email = request.POST.get('email', '')
+def track_order(request):
+    if request.method == 'POST':
+        order_number = request.POST['order_number']
+        email = request.POST['email']
         try:
-            order = Order.objects.filter(order_number=order_number, email=email)
-            if len(order)>0:
-                update = OrderUpdate.objects.filter(order_number=order_number)
-                updates = []
-                for item in update:
-                    updates.append({'text': item.update_desc, 'time': item.timestamp})
-                    response = json.dumps({"status":"success", "updates": updates, "itemsJson": order[0].items_json}, default=str)
-                return HttpResponse(response)
-            else:
-                return HttpResponse('{"status":"noitem"}')
-        except Exception as e:
-            return HttpResponse('{"status":"error"}')
-
-    return render(request, 'orders/tracker.html')
-
+            order = Order.objects.get(order_number=order_number, email=email)
+            # if the order exists, render the order details template
+            return render(request, 'orders/order_details.html', {'order': order})
+        except Order.DoesNotExist:
+            # if the order doesn't exist, render an error message
+            error_message = 'Sorry, we could not find an order with that order number and email.'
+            return render(request, 'orders/track_order.html', {'error_message': error_message})
+    else:
+        return render(request, 'orders/track_order.html')

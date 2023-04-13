@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<head>
+  <style>
+    #progress-bar {
+    width: 100%;
+    height: 70px;
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+  
+  #progress-bar::-webkit-progress-bar {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+  
+  #progress-bar::-webkit-progress-value {
+    background-image: url("https://www.shutterstock.com/shutterstock/photos/1135666970/display_1500/stock-vector--safely-packed-order-ready-to-ship-shown-by-an-arrow-and-cardbox-icon-1135666970.jpg");
+    background-size: contain;
+    border-radius: 10px;
+  }
+  
+  #progress-bar[value="25"]::-webkit-progress-value {
+    background-image: url("https://cdn4.vectorstock.com/i/1000x1000/11/63/parcel-packing-yellow-color-icon-order-packaging-vector-29161163.jpg");
+  }
+  #progress-bar[value="50"]::-webkit-progress-value {
+    background-image: url("https://cdn-icons-png.flaticon.com/512/411/411712.png");
+  }
+  
+  
+  
+  #progress-bar[value="75"]::-webkit-progress-value {
+    background-image: url("https://thumbs.dreamstime.com/b/courier-parcel-background-delivery-servic-courier-parcel-background-delivery-service-124604337.jpg");
+  }
+  
+  #progress-bar[value="100"]::-webkit-progress-value {
+    background-image: url("https://cdn4.vectorstock.com/i/1000x1000/52/73/home-delivery-services-online-delivery-concept-vector-30605273.jpg");
+  }
+  </style>
+</head>
+{% include 'includes/alerts.html' %}
+
+<!-- Main Section Start -->
+<div class="main-section">
+   
+    <div class="page-section account-header buyer-logged-in">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="user-dashboard loader-holder">
+                        <div class="user-holder">
+                            <h5 class="text-uppercase">Here Is Your Order Details</h5>
+							<hr>
+                            <button class="btn btn-secondary" onclick="history.back()"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+                            <br><br>
+                      
+                            
+
+                           
+                            <table class="table table-hover table-borderless">
+                                
+                                <tbody>
+                                
+                                  <tr>
+                                    <td class="text-left">Order Date: {{ order.created_at }}</td>
+
+                                    <td class="text-left">Order Number: {{ order.order_number }}</td>
+                                    <td class="text-left">Order  Status: {{ order.status }}</td>
+
+                                    <td>
+                                     </td>
+                                  </tr>
+                               
+                                </tbody>
+                              </table>
+                              {% if order.status == "PACKING" %}
+                              <progress id="progress-bar" value="25" max="100"></progress>
+                          {% elif order.status == "SHIPPED"%}
+                          <progress id="progress-bar" value="50" max="100"></progress>
+                          {% elif order.status == "RECEIVED"%}
+                          <progress id="progress-bar" value="75" max="100"></progress>
+                          
+                         
+                          {% else %}
+                          <progress id="progress-bar" value="100" max="100"></progress>
+                          {% endif %}
+                             
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Section End -->
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
