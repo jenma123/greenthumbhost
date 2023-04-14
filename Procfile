@@ -1,0 +1,1 @@
+web gunicorn greenthumb_main.wsgi:application --log-file -
